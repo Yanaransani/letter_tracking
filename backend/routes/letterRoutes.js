@@ -54,4 +54,18 @@ router.get("/track/:id", (req, res) => {
     });
 });
 
+//get all letters
+router.get("/all", (req, res) => {
+    console.log("Fetching all letters");
+    db.query(
+        "SELECT id, title, description, stats, current_department, qr_code, pdf_file FROM letter",
+        (err, results) => {
+            if (err) {
+                return res.status(500).send(err);
+            }
+            res.json({ letters: results });
+        }
+    );
+});
+
 module.exports = router;
